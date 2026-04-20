@@ -3,12 +3,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 from DrissionPage import ChromiumPage
-from hyperv_manager import hyperv_manager
 from ping3 import ping
 
 from xrpa_core.core.logger import logger
 from xrpa_core.dao.kv_dao import kv_dao
 from xrpa_core.entity.zb_credential import ZbCredential
+from xrpa_core.hyperv_manager import hyperv_manager
 from xrpa_core.lib.ziniao_browser_v2 import ZiniaoBrowserV2
 from xrpa_core.service.base import BaseService
 
