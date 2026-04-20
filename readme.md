@@ -1,3 +1,16 @@
+# xrpa_core
+
+## 作为模块安装
+
+### 安装方式
+
+- 本地开发安装：pip install -e .
+- 供其他项目依赖时，可直接从仓库或打包后的 wheel 安装
+
+### Python 中使用
+
+from xrpa_core import __version__
+
 ## BI数据过程命令
 
 ### 当月

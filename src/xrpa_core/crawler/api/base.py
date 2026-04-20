@@ -116,9 +116,8 @@ class TikTokBaseAPI:
         self.page.get(f"{self.base_url}/{initial_path}")
         self.shop_region = shop_region
         self.timezone_name = timezone_name
-        self.js_script = Path(r"src\tkauto\crawler\js\tiktok_fetch.js").read_text(
-            encoding="utf-8"
-        )
+        js_path = Path(__file__).resolve().parent.parent / "js" / "tiktok_fetch.js"
+        self.js_script = js_path.read_text(encoding="utf-8")
 
         self.page.wait.doc_loaded()
 
@@ -236,7 +235,7 @@ class TikTokBaseAPI:
             "extra": extra,
         }
         # 保存错误详情到临时文件
-        temp_dir = Path(tempfile.gettempdir()) / "tkauto_errors"
+        temp_dir = Path(tempfile.gettempdir()) / "xrpa_core_errors"
         temp_dir.mkdir(parents=True, exist_ok=True)
         timestamp = time.strftime("%Y%m%d_%H%M%S")
         error_file = temp_dir / f"fetch_error_{timestamp}.json"

@@ -1,17 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "xrpa_core"
 version = "0.1.0"
-description = "My project"
+description = "XRPA 核心自动化工具包"
+readme = "readme.md"
 requires-python = ">=3.12"
+dynamic = ["dependencies"]
 
+[project.scripts]
+xrpa-core = "xrpa_core.__main__:main"
+tkauto = "xrpa_core.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["tkauto*"]
-exclude = ["tests*"]
+include = ["xrpa_core", "xrpa_core.*"]
+exclude = ["xrpa_core.test", "xrpa_core.test.*"]
+
+[tool.setuptools.package-data]
+xrpa_core = ["**/*.js", "**/*.json", "**/*.yml", "**/*.yaml"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements-packaging.txt"] }
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "src/xrpa_core/test"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
@@ -20,26 +39,25 @@ log_cli = true
 log_cli_level = "INFO"
 
 [tool.pyright]
-include = ["src"]
+include = ["src", "tests"]
 extraPaths = ["src"]
 pythonVersion = "3.12"
 typeCheckingMode = "basic"
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
-src = ["src"]
+target-version = "py312"
+src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = [
-  "E",   # pycodestyle
-  "F",   # pyflakes
-  "I",   # import sort
-  "UP",  # pyupgrade
-  "B",   # bugbear
-  "SIM", # simplify
+  "E",
+  "F",
+  "I",
+  "UP",
+  "B",
+  "SIM",
 ]
-
 ignore = ["E501"]
 
 [tool.ruff.format]
