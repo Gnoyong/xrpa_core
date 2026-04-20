@@ -1,0 +1,136 @@
+# 框架配置
+framework: v2.6
+browser: chrome
+base_path: ""
+db_path: ""
+# BI 数据库（MySQL）
+bi_db:
+  host: "ocean-mysql.mysql.rds.aliyuncs.com"
+  port: 3306
+  user: "rpaInternalEdit"
+  password: "nmho4rpa2yJ@Oph"
+  database: "cy_prod_scm_base_cy"
+  charset: "utf8mb4"
+# 是否支持再入
+retriable: false
+mode: dev
+# 在路径中使用 {drive} 占位符表示 drive_name 所对应的盘符，调用 x_config 模块的 resolve_path 函数可进行解析
+# 业务配置
+# cache_dir: C:/Users/Y03/Documents/Code/bd_scheduler/cache
+base_time:
+  hours: 0
+  minutes: 0
+  seconds: 0
+shop_type:
+  fully:
+    seller_url: https://seller.tiktokshopglobalselling.com
+    base_url: https://affiliate.tiktokshopglobalselling.com
+    host: tiktokshopglobalselling.com
+    timezone_name: Asia/Hong_Kong
+  global:
+    seller_url: https://seller.us.tiktokshopglobalselling.com
+    base_url: https://affiliate.tiktokshopglobalselling.com
+    host: tiktokshopglobalselling.com
+    timezone_name: Asia/Hong_Kong
+  us:
+    seller_url: https://seller-us.tiktok.com
+    base_url: https://affiliate-us.tiktok.com
+    host: tiktok.com
+    timezone_name: America/Los_Angeles
+shops:
+  source:
+    id: source
+    name: N-Source
+    type: global
+    full_name: Nebility-男装-直邮-店铺后台-天厚
+    assign:
+      type: normal
+      high: 4
+      low: 2
+    category: male
+    aadvid: "7566464136474034184"
+  official:
+    id: official
+    name: N-Official
+    type: global
+    full_name: Nebility-直邮-店铺后台-元雅
+    assign:
+      type: normal
+    category: female
+    aadvid: "7417785022268194832"
+  mens:
+    id: mens
+    name: N-Mens
+    type: us
+    full_name: Nebility-MENS-店铺后台-TAILONG INC
+    assign:
+      type: normal
+    category: male
+    aadvid: "7371667168267845648"
+  us:
+    id: us
+    name: N-US
+    type: us
+    full_name: Nebility-US-店铺后台-TAILONG INC
+    assign:
+      type: normal
+    category: female
+    aadvid: "7320046199229120514"
+feishu_app:
+  # RPA Robot
+  rpa_robot:
+    app_id: cli_a9fb4e3d6ab99cd0
+    app_secret: cmkmfzR0wLD2ZhU4vFl67ExZBEBfB8sk
+  x:
+    app_id: cli_a9ed8edf27b99bb5
+    app_secret: zl6Djz5lMz6z2gJZDgGVEOs3G64UJRiG
+  fs_rpa:
+    app_id: cli_a64c4669c6f8900b
+    app_secret: v1hNji72uKtilx3VjKl43FRc7XWCf0ql
+webhook:
+  url: https://open.feishu.cn/open-apis/bot/v2/hook/f3706136-0c88-4a73-a493-3f35a2e746fa
+  secret: wXBPyvDP6MvR3B1SDv29y
+dev_webhook:
+  url: https://open.feishu.cn/open-apis/bot/v2/hook/e05a90aa-62ad-4218-8e8f-78bb38b2e009
+spreadsheet:
+  #  同 video 表
+  bd_sheet:
+    token: RrRiwRaTJiIHAwkYJt0c1xPmnfE
+    obj_token: LhXvs95GnhogiDtSwCjc4V3tnQb
+    female: "女装归属"
+    male: "男装归属"
+  application_sheet:
+    url: https://v0xsosgslg1.feishu.cn/wiki/ZQHzw6mZzij5pXkAGSiczT5Mnrh?sheet=mfYSk
+    token: ZQHzw6mZzij5pXkAGSiczT5Mnrh
+    obj_token: Ttt8sNNY8huWUetSZ2Dc77qfn0b
+  bd_schduler:
+    token: N69ywpBgPiNQ8lkleSpcOzSVnLc
+    obj_token: Gn0ws7qIDhv6UPt9DvvccBXHngh
+  logistics:
+    token: RrRiwRaTJiIHAwkYJt0c1xPmnfE
+    obj_token: LhXvs95GnhogiDtSwCjc4V3tnQb
+  video:
+    token: L2xVw8lVEiBQYRkBtkrcgGgZn5e
+    obj_token: K3PZsCz7XhCtpTtLyjIcpvrqnWd
+  test:
+    token: N69ywpBgPiNQ8lkleSpcOzSVnLc
+    obj_token: Gn0ws7qIDhv6UPt9DvvccBXHngh
+env_host: 172.26.125.113
+env_smb:
+  username: Xen
+  password: "123456"
+  path: "\\\\{env_host}\\Users\\Xen\\transit\\tk_env.json"
+app:
+  video:
+    uuid: 646a084d-f0e3-487b-a684-ee48488ec7ba
+  logistics:
+    uuid: 5e52edc9-1b6b-4c00-bfc3-175928f05487
+  apply:
+    verify-uuid: 054ff3af-7f10-414f-83d2-3990a9ed8339
+    export-uuid: dd2e9898-e4f2-4525-9572-078a0f3401b0
+  bd:
+    rotate-uuid: 1849df58-9223-49b9-8f8d-83ede6019634
+feishu:
+  group:
+    tk_notify:
+      chat_id: "oc_32bb3ae5a4213fb89c73b7726000e079"

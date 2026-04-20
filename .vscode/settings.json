@@ -1,0 +1,29 @@
+{
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.autoComplete.extraPaths": ["${workspaceFolder}/src"],
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": [
+        "-NoExit",
+        "-Command",
+        "function tkauto { uv run -m tkauto @args }"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "editor.codeActionsOnSave": {
+    // "source.organizeImports": "always",
+    "source.fixAll.ruff": "always"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "editor.formatOnSave": true,
+  "python.analysis.autoImportCompletions": true,
+  "ruff.enable": true,
+  "editor.fontFamily": "Consolas, 'Courier New', 'Microsoft YaHei UI',monospace",
+  "terminal.integrated.fontFamily": ""
+}
