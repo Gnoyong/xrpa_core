@@ -15,7 +15,7 @@ xrpa-core = "xrpa_core.__main__:main"
 tkauto = "xrpa_core.__main__:main"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = { "" = "src" }
 include-package-data = true
 
 [tool.setuptools.packages.find]
@@ -42,7 +42,7 @@ log_cli_level = "INFO"
 include = ["src", "tests"]
 extraPaths = ["src"]
 pythonVersion = "3.12"
-typeCheckingMode = "basic"
+typeCheckingMode = "standard"
 
 [tool.ruff]
 line-length = 88
@@ -50,14 +50,7 @@ target-version = "py312"
 src = ["src", "tests"]
 
 [tool.ruff.lint]
-select = [
-  "E",
-  "F",
-  "I",
-  "UP",
-  "B",
-  "SIM",
-]
+select = ["E", "F", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
 
 [tool.ruff.format]

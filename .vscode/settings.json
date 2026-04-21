@@ -19,7 +19,7 @@
     "source.fixAll.ruff": "always"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "editor.formatOnSave": true,
   "python.analysis.autoImportCompletions": true,

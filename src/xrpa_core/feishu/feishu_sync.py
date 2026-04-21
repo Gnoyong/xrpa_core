@@ -1289,9 +1289,9 @@ class FeishuSheetExporter:
                 merge_end = max_cols - 1
 
         # 扫描分组边界
-        group_ranges: list[tuple[int, int]] = (
-            []
-        )  # (start, end) 均为 1-indexed sheet 行号
+        group_ranges: list[
+            tuple[int, int]
+        ] = []  # (start, end) 均为 1-indexed sheet 行号
         current_val = None
         start_row = None  # 1-indexed
 

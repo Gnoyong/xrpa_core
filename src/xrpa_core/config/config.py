@@ -1,7 +1,6 @@
 import tempfile
 
 from xrpa_core.entity.zb_credential import ZbCredential
-from xrpa_core.x_framework.x_config import get_xconfig_item_v2
 
 
 class Config:
@@ -14,8 +13,6 @@ class Config:
 
     def __init__(self):
         self.cache_dir = tempfile.gettempdir()
-        self.vm_host = get_xconfig_item_v2("env_host")
-
 
 def get_config():
     return Config()
