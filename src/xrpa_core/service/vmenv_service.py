@@ -7,6 +7,7 @@ from ping3 import ping
 
 from xrpa_core.core.logger import logger
 from xrpa_core.dao.kv_dao import kv_dao
+from xrpa_core.db.models import DatabaseManager
 from xrpa_core.entity.zb_credential import ZbCredential
 from xrpa_core.hyperv_manager import hyperv_manager
 from xrpa_core.lib.ziniao_browser_v2 import ZiniaoBrowserV2
@@ -14,7 +15,7 @@ from xrpa_core.service.base import BaseService
 
 
 class VmEnvService(BaseService):
-    def __init__(self, vm_name: str, zb_credential: ZbCredential):
+    def __init__(self, vm_name: str, zb_credential: ZbCredential, dm: DatabaseManager):
         self.name = vm_name
         hyperv_manager.start_vm(vm_name)
         host = hyperv_manager.get_vm_ip(vm_name)
@@ -31,7 +32,7 @@ class VmEnvService(BaseService):
             r"C:/Users/xen/SuperBrowser/5.290.1.15/SuperBrowser.exe",
             self.host,
         )
-        super().__init__()
+        super().__init__(dm)
 
     def _is_chrome_debug_port_available(self, port: int) -> bool:
         """测试 Chrome DevTools Protocol 端口是否可用"""
