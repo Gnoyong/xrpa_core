@@ -11,7 +11,7 @@ class BaseService:
         if dm is None:
             dm = default_dm
 
-        self.dm = default_dm
+        self.dm = dm
 
     def _get_session(self):
         return self.dm.get_session()
