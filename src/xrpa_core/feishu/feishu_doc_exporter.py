@@ -1,7 +1,7 @@
 import json
 import time
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 import lark_oapi as lark
@@ -32,14 +32,14 @@ class FeishuExportTask:
         self.job_status = None
 
 
-class FeishuDocType(str, Enum):
+class FeishuDocType(StrEnum):
     DOC = "doc"  # 旧版飞书文档
     SHEET = "sheet"  # 飞书电子表格
     BITABLE = "bitable"  # 飞书多维表格
     DOCX = "docx"  # 新版飞书文档
 
 
-class FeishuFileExtension(str, Enum):
+class FeishuFileExtension(StrEnum):
     DOCX = "docx"  # Microsoft Word
     PDF = "pdf"  # PDF
     XLSX = "xlsx"  # Microsoft Excel
@@ -55,7 +55,7 @@ class FeishuDocExporter:
         token: str,
         file_extension: FeishuFileExtension,
         doc_type: FeishuDocType,
-        sub_id: str = None,
+        sub_id: str | None = None,
     ) -> FeishuExportTask:
         """
         create_export_task 的 Docstring
@@ -70,17 +70,17 @@ class FeishuDocExporter:
         :param sub_id: 说明
         :type sub_id: str
         """
+        builder = (
+            ExportTask.builder()
+            .file_extension(file_extension)
+            .token(token)
+            .type(doc_type)
+        )
+        if sub_id:
+            builder = builder.sub_id(sub_id)
+
         request: CreateExportTaskRequest = (
-            CreateExportTaskRequest.builder()
-            .request_body(
-                ExportTask.builder()
-                .file_extension(file_extension)
-                .token(token)
-                .type(doc_type)
-                .sub_id(sub_id)
-                .build()
-            )
-            .build()
+            CreateExportTaskRequest.builder().request_body(builder.build()).build()
         )
 
         response: CreateExportTaskResponse = self.client.drive.v1.export_task.create(
@@ -139,6 +139,9 @@ class FeishuDocExporter:
             return None
 
         name = response.file_name
+        if not name:
+            raise RuntimeError("下载失败，response中没有文件名")
+
         stem, suffix = name.rsplit(".", 1)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -146,9 +149,11 @@ class FeishuDocExporter:
         new_name = f"{stem}_{timestamp}.{suffix}"
         file_path = save_path.joinpath(new_name)
 
-        f = open(str(file_path), "wb")
-        f.write(response.file.read())
-        f.close()
+        if not response.file:
+            raise RuntimeError("下载失败，response中没有文件内容")
+
+        with open(str(file_path), "wb") as f:
+            f.write(response.file.read())
         return file_path
 
     def export_and_download(
