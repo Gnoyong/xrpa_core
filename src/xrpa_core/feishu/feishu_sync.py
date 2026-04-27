@@ -18,8 +18,7 @@ from time import sleep
 from typing import Any
 
 from xrpa_core.core import logger
-
-# from xrpa_core.feishu.feishu_client import get_client
+from xrpa_core.feishu.feishu_client import FeishuApp
 from xrpa_core.feishu.feishu_doc_exporter import (
     FeishuDocExporter,
     FeishuDocType,
@@ -210,12 +209,16 @@ class FeishuSheetExporter:
     """
 
     def __init__(
-        self, token: str, config: SheetExportConfig, obj_token: str | None = None
+        self,
+        app: FeishuApp,
+        token: str,
+        config: SheetExportConfig,
+        obj_token: str | None = None,
     ):
         self.token = token
         self.obj_token = obj_token or token
         self.config = config
-        self.client = get_client()
+        self.client = app.get_client()
         self.fs_spreadsheet = FeishuSpreadSheet(self.client, token)
 
     # ------------------------------------------------------------------
