@@ -227,7 +227,7 @@ class FeishuSheetExporter:
             rows:       查询结果，每条为 dict（列名 → 值）。
         """
         sheet = self.create_sheet(sheet_name)
-        self.db_to_feishu(sheet.raw_sheet.sheet_id, rows, [], only_api=True)
+        self.db_to_feishu(sheet._raw_sheet.sheet_id, rows, [], only_api=True)
 
     def create_sheet(self, sheet_name: str) -> FeishuSheet:
         """导出一个 sheet。
@@ -312,7 +312,7 @@ class FeishuSheetExporter:
 
         updated_count = 0
 
-        with logger.contextualize(prefix=f"{sheet.raw_sheet.title}"):
+        with logger.contextualize(prefix=f"{sheet._raw_sheet.title}"):
             should_match_existing = (
                 bool(db_rows)
                 and bool(self.config.primary_header)
@@ -880,7 +880,7 @@ class FeishuSheetExporter:
     def _get_existing_sheet(self, sheet_name: str) -> FeishuSheet | None:
         """从 spreadsheet 中查找已有 sheet，返回 FeishuSheet 或 None。"""
         sheet_map = {
-            sheet.raw_sheet.title: sheet for sheet in self.fs_spreadsheet.sheets
+            sheet._raw_sheet.title: sheet for sheet in self.fs_spreadsheet.sheets
         }  # {name: {sheetId, ...}}
         if sheet_name not in sheet_map:
             logger.warning(f"sheet '{sheet_name}' 不存在")
@@ -2209,13 +2209,13 @@ class FeishuSheetExporter:
             )
 
     def _get_sheet_col_count(self, sheet: FeishuSheet) -> int | None:
-        if sheet.raw_sheet and sheet.raw_sheet.grid_properties:
-            return sheet.raw_sheet.grid_properties.column_count
+        if sheet._raw_sheet and sheet._raw_sheet.grid_properties:
+            return sheet._raw_sheet.grid_properties.column_count
         return None
 
     def _get_sheet_row_count(self, sheet: FeishuSheet) -> int | None:
-        if sheet.raw_sheet and sheet.raw_sheet.grid_properties:
-            return sheet.raw_sheet.grid_properties.row_count
+        if sheet._raw_sheet and sheet._raw_sheet.grid_properties:
+            return sheet._raw_sheet.grid_properties.row_count
         return None
 
     def _col_in_grid(self, sheet: FeishuSheet, col_index: int) -> bool:

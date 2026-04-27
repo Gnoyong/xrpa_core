@@ -137,8 +137,10 @@ class FeishuSheet(FeishuApiBase):
         sheet_id: str,
         raw_sheet: Sheet | None = None,
     ):
-        super().__init__(client, spreadsheet_token)
+        super().__init__(client)
+        self.spreadsheet_token = spreadsheet_token
         self.sheet_id = sheet_id
+
         # 由 SpreadSheet 赋值
         if raw_sheet:
             self.raw_sheet: Sheet = raw_sheet
@@ -151,10 +153,14 @@ class FeishuSheet(FeishuApiBase):
         if self.raw_sheet.sheet_id is None:
             raise ValueError("raw_sheet 中 sheet_id 不能为空")
 
-        self._id = self.raw_sheet.sheet_id
+        self.id = self.raw_sheet.sheet_id
+        self.title = self.raw_sheet.title
 
     def get_id(self):
-        return self._id
+        return self.id
+
+    def get_title(self):
+        return self.title
 
     def _get_detail(self) -> GetSpreadsheetSheetResponseBody | None:
         request: GetSpreadsheetSheetRequest = (
@@ -228,7 +234,9 @@ class FeishuSheet(FeishuApiBase):
                 (
                     len(row)
                     if isinstance(row, (list, tuple))
-                    else 0 if row is None else 1
+                    else 0
+                    if row is None
+                    else 1
                 )
                 for row in values
             )
@@ -456,9 +464,9 @@ class FeishuSheet(FeishuApiBase):
             raise ValueError("style_data 不能为空")
 
         # 解析并规范化所有样式项
-        parsed_items: list[tuple[list[str], dict, int]] = (
-            []
-        )  # (ranges, style_dict, border_cells)
+        parsed_items: list[
+            tuple[list[str], dict, int]
+        ] = []  # (ranges, style_dict, border_cells)
         total_border_cells = 0
 
         for raw_item in style_data:
@@ -727,7 +735,9 @@ class FeishuSheet(FeishuApiBase):
                     (
                         len(row)
                         if isinstance(row, (list, tuple))
-                        else 0 if row is None else 1
+                        else 0
+                        if row is None
+                        else 1
                     )
                     for row in values
                 )
