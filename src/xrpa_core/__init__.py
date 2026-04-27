@@ -1,8 +1,9 @@
 """xrpa_core public package interface."""
 
 import xrpa_core.core as core
+import xrpa_core.excel_importer as excel_importer
 import xrpa_core.feishu as feishu
 
 __version__ = "0.1.0"
 
-__all__ = ["__version__", "feishu", "core"]
+__all__ = ["__version__", "feishu", "core", "excel_importer"]
