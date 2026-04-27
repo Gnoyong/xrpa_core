@@ -22,6 +22,7 @@ from lark_oapi.api.drive.v1.model.get_export_task_request import GetExportTaskRe
 from lark_oapi.api.drive.v1.model.get_export_task_response import GetExportTaskResponse
 
 from xrpa_core.core.logger import logger
+from xrpa_core.feishu.feishu_client import FeishuApp
 
 
 class FeishuExportTask:
@@ -47,8 +48,8 @@ class FeishuFileExtension(StrEnum):
 
 
 class FeishuDocExporter:
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, app: FeishuApp):
+        self.client = app.get_client()
 
     def create_export_task(
         self,
