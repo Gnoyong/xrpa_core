@@ -5,7 +5,8 @@ from typing import Any
 
 from xrpa_core.core.logger import logger
 from xrpa_core.feishu.feishu_sheet import FeishuSheet
-from xrpa_core.x_framework.x_excel import number_to_letters
+
+from .excel_utils import number_to_letters
 
 
 def build_column_values(

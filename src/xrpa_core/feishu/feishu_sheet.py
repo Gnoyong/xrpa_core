@@ -29,7 +29,8 @@ from xrpa_core.feishu.feishu_api_base import (
     ResponseError,
     _parse_json_response,
 )
-from xrpa_core.x_framework.x_excel import letters_to_number, number_to_letters
+
+from .excel_utils import letters_to_number, number_to_letters
 
 # ==========================================================
 # Exception

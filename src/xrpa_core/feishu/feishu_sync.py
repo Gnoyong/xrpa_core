@@ -18,7 +18,8 @@ from time import sleep
 from typing import Any
 
 from xrpa_core.core import logger
-from xrpa_core.feishu.feishu_client import get_client
+
+# from xrpa_core.feishu.feishu_client import get_client
 from xrpa_core.feishu.feishu_doc_exporter import (
     FeishuDocExporter,
     FeishuDocType,
@@ -32,7 +33,8 @@ from xrpa_core.feishu.feishu_sheet import (
     UpdateSheetRequestModel,
 )
 from xrpa_core.feishu.feishu_update_utils import write_columns_from_updates
-from xrpa_core.x_framework.x_excel import number_to_letters
+
+from .excel_utils import number_to_letters
 
 
 # ============================================================
