@@ -29,6 +29,7 @@ from xrpa_core.feishu.feishu_api_base import (
     ResponseError,
     _parse_json_response,
 )
+from xrpa_core.feishu.feishu_client import FeishuApp
 
 from .excel_utils import letters_to_number, number_to_letters
 
@@ -800,10 +801,12 @@ class FeishuSpreadSheet(FeishuApiBase):
     飞书电子表格对象，封装了对电子表格的操作，包括获取表格信息、添加/删除工作表等
     """
 
-    def __init__(self, client, spreadsheet_token: str):
+    def __init__(self, app: FeishuApp, spreadsheet_token: str):
         if not spreadsheet_token or len(spreadsheet_token) == 0:
             raise ValueError("必须提供有效的 spreadsheet_token")
-        super().__init__(client, spreadsheet_token)
+        super().__init__(app.get_client())
+
+        self.spreadsheet_token = spreadsheet_token
 
         raw_sheets = self._get_sheets().sheets
         if raw_sheets is None:
