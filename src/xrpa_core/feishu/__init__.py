@@ -1,7 +1,5 @@
-from xrpa_core.feishu.feishu_client import get_client
-
 from .feishu_card import CardApi
+from .feishu_client import FeishuApp
+from .feishu_sheet import FeishuSheet, FeishuSpreadSheet
 
-card_api = CardApi(get_client())
-
-__all__ = ["card_api"]
+__all__ = ["CardApi", "FeishuSheet", "FeishuSpreadSheet", "FeishuApp"]
