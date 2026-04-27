@@ -21,6 +21,7 @@ from lark_oapi.api.sheets.v3.model import (
     QuerySpreadsheetSheetResponseBody,
     Sheet,
 )
+from lark_oapi.api.wiki.v2 import GetNodeSpaceRequest, GetNodeSpaceResponse
 from pydantic import BaseModel, Field
 
 from xrpa_core.core.logger import logger
@@ -822,6 +823,26 @@ class FeishuSpreadSheet(FeishuApiBase):
             )
             self.sheets.append(sheet)
 
+    def get_node_space(self) -> GetNodeSpaceResponse:
+        """
+        get_node_space 的 Docstring
+
+        :param self: 说明
+        :type self: FeishuSpreadSheet
+        """
+        # 构造请求对象
+        request: GetNodeSpaceRequest = (
+            GetNodeSpaceRequest.builder()
+            .obj_type("wiki")
+            .token(self.spreadsheet_token)
+            .build()
+        )
+        response: GetNodeSpaceResponse = self._invoke_response(
+            "获取空间信息", lambda: self.client.wiki.v2.space.get_node(request)
+        )
+
+        return response
+
     def _get_sheets(self) -> QuerySpreadsheetSheetResponseBody:
         request: QuerySpreadsheetSheetRequest = (
             QuerySpreadsheetSheetRequest.builder()
@@ -879,8 +900,8 @@ class FeishuSpreadSheet(FeishuApiBase):
         通过name找表格
 
         :param self: 说明
-        :param sheet_id: 说明
-        :type sheet_id: str
+        :param name: 说明
+        :type name: str
         :return: 说明
         :rtype: Any
         """
