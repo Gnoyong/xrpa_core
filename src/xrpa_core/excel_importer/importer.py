@@ -31,7 +31,7 @@ class ExcelImporterConfig:
 
     model: type[DeclarativeBase]
     # value支持单列名，或使用"列A|列B"/ ["列A", "列B"] 表示候选列名
-    field_mapping: dict[str, str | list[str]]
+    field_mapping: dict[str, str] | dict[str, list[str]]
     field_cleaners: dict[str, Callable[[Any], Any]] = field(default_factory=dict)
     custom_fields_handler: Callable[[pd.Series], dict[str, Any]] | None = None
     sheet_name: str | int | None = None
